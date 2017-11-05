@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "scripts": {
+    "clean": "rimraf 'src/**/*.js src/**/*.js.map src'",
+    "build": "npm run clean && tsc",
+    "test": "mocha --compilers ts:ts-node/register --recursive 'src/**/*.spec.ts'",
+    "test:watch": "mocha --compilers ts:ts-node/register --recursive --watch --reporter progress 'src/**/*.spec.ts'"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/fs-extra": "^4.0.3",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.47",
+    "@types/rimraf": "^2.0.2",
+    "chai": "^3.5.0",
+    "fs-extra": "^4.0.2",
+    "mocha": "^3.0.1",
+    "mocha-where": "^1.1.0",
+    "rimraf": "^2.6.2",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "@types/glob": "^5.0.33",
+    "@types/lodash": "^4.14.80",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.4"
+  }
+}
