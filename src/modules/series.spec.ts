@@ -6,7 +6,7 @@ import {resolveSeries, readSeries} from "./series";
 import {where} from "mocha-where/src/where";
 import {CompleteEpisode} from "./episode";
 
-describe("ParsedSeries Module", () => {
+describe("Series Module", () => {
 
     describe("readSeries()", () => {
         beforeEach(() => rimraf("tmp/"));
