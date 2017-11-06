@@ -3,8 +3,8 @@
   "scripts": {
     "clean": "rimraf 'src/**/*.js src/**/*.js.map src'",
     "build": "npm run clean && tsc",
-    "test": "mocha --compilers ts:ts-node/register --recursive 'src/**/*.spec.ts'",
-    "test:watch": "mocha --compilers ts:ts-node/register --recursive --watch --reporter progress 'src/**/*.spec.ts'"
+    "test": "mocha --compilers ts:ts-node/register --recursive \"src/**/*.spec.ts\"",
+    "test:watch": "mocha --compilers ts:ts-node/register --recursive --watch --reporter progress \"src/**/*.spec.ts\""
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
