@@ -1,4 +1,4 @@
-import {lstatSync, mkdirSync, renameSync, statSync} from "fs";
+import {existsSync, lstatSync, mkdirSync, renameSync, statSync} from "fs";
 import {join, join as joinPaths} from "path";
 import {sync as glob} from "glob";
 import {padStart} from "lodash";
@@ -19,12 +19,17 @@ function createDirIfNotExists(path: string): void {
     }
 }
 
-export function moveToSeriesFolder(episode: CompleteEpisode): void {
+export function moveToSeriesFolder(episode: CompleteEpisode): CompleteEpisode | null {
     const seasonFolder = `Season ${padStart(episode.season.toString(), 2, '0')}`;
     createDirIfNotExists(join(episode.series.folder, seasonFolder));
 
     const newPath = `${episode.series.folder}/${seasonFolder}/${formatFilename(episode)}`;
-    renameSync(episode.path, newPath);
+    if(!existsSync(newPath)) {
+        renameSync(episode.path, newPath);
+        return null;
+    } else {
+        return episode;
+    }
 }
 
 export function readVideoFiles(path: string): string[] {

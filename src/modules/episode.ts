@@ -1,6 +1,6 @@
-import {isNull, replace, negate, every} from "lodash";
+import {every, isNull, negate} from "lodash";
 import {extractNumber, extractString, whenPresent} from "./util";
-import {ParsedSeries, CompleteSeries} from "./series";
+import {CompleteSeries, ParsedSeries} from "./series";
 import {isUndefined} from "util";
 import {basename} from "path";
 
