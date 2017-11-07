@@ -7,18 +7,20 @@ describe("Episode Module", () => {
     describe("parseEpisode()", () => {
 
         where([
-            ['path',                               'season', 'episode', 'series',     'extension'],
-            ['some/folder/Travel Man S02E05.mp4',  2,        5,         'Travel Man', 'mp4'     ],
-            ['source/Travel.Man.S7E3.xvid.mkv',         7,        3,         'Travel Man', 'mkv'     ],
-            ['Travel-Man-S14E22-super-rip.avi',              14,       22,        'Travel Man', 'avi'     ],
+            ['path',                                                         'season', 'episode', 'series',                  'extension'],
+            ['some/folder/Travel Man S02E05.mp4',                            2,        5,         'travel man',              'mp4'      ],
+            ['source/Travel.Man.S7E3.xvid.mkv',                              7,        3,         'travel man',              'mkv'      ],
+            ['Travel-Man-S14E22-super-rip.avi',                              14,       22,        'travel man',              'avi'      ],
+            ['Travel.Man.48.Hours.In.Series.5.2of4.Budapest.720p.HDTV.mp4',  5,        2,         'travel man 48 hours in',  'mp4'      ],
+
         ])
         .it('parses episodes in the format "#path"', (scenario: any) => {
             const parsed = parseEpisode(scenario.path);
 
             expect(parsed.path).to.equal(scenario.path);
             expect(parsed.season).to.equal(scenario.season);
-            expect(parsed.episode).to.equal(scenario.episode);
             expect(parsed.series.name).to.equal(scenario.series);
+            expect(parsed.episode).to.equal(scenario.episode);
             expect(parsed.extension).to.equal(scenario.extension);
         });
 

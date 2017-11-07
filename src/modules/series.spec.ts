@@ -31,14 +31,15 @@ describe("Series Module", () => {
     describe("resolveSeries()", () => {
 
         where([
-            ['seriesName',      'episodeName' ],
-            ['Harmon Quest',    'harmonquest' ],
-            ['harmonquest',     'Harmon Quest'],
-            ['Harmon-Quest',    'harmon.quest'],
-            ['harmon.quest',    'Harmon-Quest'],
-            ['The HarmonQuest', 'Harmon-Quest'],
-            ['Harmon-Quest',    'the HarmonQuest'],
-        ])
+            ['seriesName',             'episodeName'    ],
+            ['Harmon Quest',           'harmonquest'    ],
+            ['harmonquest',            'Harmon Quest'   ],
+            ['Harmon-Quest',           'harmon.quest'   ],
+            ['harmon.quest',           'Harmon-Quest'   ],
+            ['The HarmonQuest',        'Harmon-Quest'   ],
+            ['Harmon-Quest',           'the HarmonQuest'],
+            ['Travel Man',             'Travel.Man.48.Hours.In'],
+         ])
         .it('matches series "#seriesName" to episode "#episodeName"', (scenario: any) => {
             const matchingSeries =   { name: scenario.seriesName, folder: "matching/folder/" };
 

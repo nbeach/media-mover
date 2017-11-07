@@ -20,25 +20,41 @@ export interface CompleteEpisode {
     episode: number
 }
 
-function parseSeriesName(path: string): string | null {
-    const filename = basename(path);
-    const extracted = extractString(filename, /(.*?)[.\W-][Ss]\d{1,2}/);
+function extractSeriesName(path: string): string | null {
+    const filename = basename(path).toLowerCase();
+    let extracted = extractString(filename, /(.*?)[.\W-]s\d{1,2}/)
+                 || extractString(filename, /(.*?)[.\W-]series[.\W-]\d{1,2}/);
 
-    return whenPresent(extracted,name => replace(name, /[.-]/, " "));
+    return whenPresent(extracted,name => name.replace(new RegExp('[.-]', 'g'), " "));
 }
 
-function parseFileExtension(filename: string): string | null {
-    const extracted = extractString(filename, /\.([a-zA-Z0-9]*)$/);
-    return whenPresent(extracted, extension => extension.toLowerCase());
+function extractEpisodeNumber(path: string): number | null {
+    const lowercaseFilename = path.toLowerCase();
+    return extractNumber(lowercaseFilename, /e(\d{1,2})/)
+        || extractNumber(lowercaseFilename, /series[.\W-]\d{1,2}[.\W-](\d{1,2})of\d{1,2}/);
+}
+
+function extractSeasonNumber(path: string): number | null {
+    const lowercaseFilename = path.toLowerCase();
+
+    return extractNumber(lowercaseFilename, /s(\d{1,2})/)
+        || extractNumber(lowercaseFilename, /series[.\W-](\d{1,2})/);
+}
+
+function extractFileExtension(filename: string): string | null {
+    return extractString(filename.toLowerCase(), /\.([a-z0-9]*)$/);
 }
 
 export function parseEpisode(filename: string): ParsedEpisode {
+    const pattern1 = /(.*?)[.\W-]s(\d{1,2})e(\d{1,2}).*\.([a-z0-9]*)$/;
+    const pattern2 = /(.*?)[.\W-]series(\d{1,2})[.\W-](\d{1,2})of(\d{1,2}).*\.([a-z0-9]*)$/;
+    const matches = filename.toLowerCase().match(pattern1);
     return {
         path: filename,
-        extension: parseFileExtension(filename),
-        series: { name: parseSeriesName(filename) },
-        season: extractNumber(filename, /[Ss](\d{1,2})/),
-        episode: extractNumber(filename, /[Ee](\d{1,2})/)
+        extension: extractFileExtension(filename),
+        series: { name: extractSeriesName(filename) },
+        season: extractSeasonNumber(filename),
+        episode: extractEpisodeNumber(filename)
     }
 }
 

@@ -13,7 +13,7 @@ function normalizeName(name: string | null): string {
 }
 
 function episodeIsPartOfSeries(episode: ParsedEpisode, series: ParsedSeries) {
-    return  normalizeName(episode.series.name) === normalizeName(series.name);
+    return  normalizeName(episode.series.name).indexOf(normalizeName(series.name)) >= 0;
 }
 
 export function resolveSeries(series: ParsedSeries[], episode: ParsedEpisode): ParsedEpisode | CompleteEpisode {
