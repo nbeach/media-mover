@@ -4,16 +4,17 @@ import {moveToSeriesFolder, readVideoFiles} from "./modules/files";
 import {isCompleteEpisode, ParsedEpisode, parseEpisode} from "./modules/episode";
 import {isNull} from "util";
 
-export default function moveMedia(sourceFolder: string, destinationFolder: string): ParsedEpisode[] {
+export default async function moveMedia(sourceFolder: string, destinationFolder: string): Promise<ParsedEpisode[]> {
     const series = readSeries(destinationFolder);
     const episodes = readVideoFiles(sourceFolder)
         .map(parseEpisode)
         .map(curry(resolveSeries)(series));
 
-    const movingFailures = episodes
+    const moves = episodes
         .filter(isCompleteEpisode)
         .map(moveToSeriesFolder)
-        .filter(negate(isNull));
+
+    const movingFailures = (await Promise.all(moves)).filter(negate(isNull));
 
     return episodes.filter(negate(isCompleteEpisode));
 }

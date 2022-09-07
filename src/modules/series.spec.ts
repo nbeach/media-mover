@@ -3,8 +3,8 @@ import {outputFileSync} from "fs-extra";
 import {sync as rimraf} from "rimraf";
 import {expect} from "chai";
 import {resolveSeries, readSeries} from "./series";
-import {where} from "mocha-where/src/where";
 import {CompleteEpisode} from "./episode";
+const {where} = require("mocha-where/src/where");
 
 describe("Series Module", () => {
 

@@ -1,8 +1,9 @@
-import {existsSync, lstatSync, mkdirSync, renameSync, statSync} from "fs";
+import {existsSync, lstatSync, mkdirSync, statSync} from "fs";
 import {join, join as joinPaths} from "path";
 import {sync as glob} from "glob";
 import {padStart} from "lodash";
 import {CompleteEpisode} from "./episode";
+import {moveFile} from 'move-file';
 
 function formatFilename(episode: CompleteEpisode): string {
     const seasonNumber = padStart(episode.season.toString(), 2, '0');
@@ -19,13 +20,13 @@ function createDirIfNotExists(path: string): void {
     }
 }
 
-export function moveToSeriesFolder(episode: CompleteEpisode): CompleteEpisode | null {
+export async function moveToSeriesFolder(episode: CompleteEpisode): Promise<CompleteEpisode | null> {
     const seasonFolder = `Season ${padStart(episode.season.toString(), 2, '0')}`;
     createDirIfNotExists(join(episode.series.folder, seasonFolder));
 
     const newPath = `${episode.series.folder}/${seasonFolder}/${formatFilename(episode)}`;
     if(!existsSync(newPath)) {
-        renameSync(episode.path, newPath);
+        await moveFile(episode.path, newPath);
         return null;
     } else {
         return episode;

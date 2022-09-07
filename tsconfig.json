@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "commonjs",
+    "target": "es2022",
+    "module": "es2022",
     "sourceMap": true,
     "strictNullChecks": true,
     "noEmitHelpers": true,
@@ -9,6 +9,7 @@
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
+    "lib": ["esnext"],
     "types": ["mocha", "node"],
     "declaration" : true
   },

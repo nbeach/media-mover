@@ -31,7 +31,7 @@ describe("Files Module", () => {
 
     describe("moveToSeriesFolder()", () => {
 
-        it("move files to folders", () => {
+        it("move files to folders", async () => {
             outputFileSync("tmp/destination/HarmonQuest/Season 01/HarmonQuest S01E01.mp4", "");
             const episode: CompleteEpisode = {
                 path: "tmp/source/sub/Harmon-Quest.S2E5.mp4",
@@ -46,7 +46,7 @@ describe("Files Module", () => {
             };
             outputFileSync(episode.path, "");
 
-            const actual = moveToSeriesFolder(episode);
+            const actual = await moveToSeriesFolder(episode);
 
             const sourceContents = glob("tmp/source/**/*").filter(isFile);
             const destinationContents = glob("tmp/destination/**/*").filter(isFile);
@@ -56,7 +56,7 @@ describe("Files Module", () => {
             expect(actual).to.be.null;
         });
 
-        it("does not overwrite existing files", () => {
+        it("does not overwrite existing files", async () => {
             outputFileSync("tmp/destination/HarmonQuest/Season 01/HarmonQuest S01E01.mp4", "original");
             const episode: CompleteEpisode = {
                 path: "tmp/source/sub/Harmon-Quest.S01E01.mp4",
@@ -71,7 +71,7 @@ describe("Files Module", () => {
             };
             outputFileSync(episode.path, "new");
 
-            const actual = moveToSeriesFolder(episode);
+            const actual = await moveToSeriesFolder(episode);
 
             const sourceContents = glob("tmp/source/**/*").filter(isFile);
             const destinationContents = glob("tmp/destination/**/*").filter(isFile);

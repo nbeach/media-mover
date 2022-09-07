@@ -14,13 +14,13 @@ describe("MoveMedia Module", () => {
 
     describe("modeMedia()", () => {
 
-        it("lists the video files in the provided folder", () => {
+        it("lists the video files in the provided folder", async () => {
             outputFileSync("tmp/source/sub/Harmon Quest.S2E5.mp4", "");
             outputFileSync("tmp/source/Travel.Man.S03E11.mp4", "");
             outputFileSync("tmp/destination/HarmonQuest/Season 01/HarmonQuest S01E01.mp4", "");
             outputFileSync("tmp/destination/Travel Man/Season 01/Travel Man S01E01.mp4", "");
 
-            moveMedia("tmp/source", "tmp/destination");
+            await moveMedia("tmp/source", "tmp/destination");
 
             const isFile = negate(isDirectory);
             const sourceContents = glob("tmp/source/**/*").filter(isFile);
@@ -32,12 +32,12 @@ describe("MoveMedia Module", () => {
             expect(destinationContents).to.contain("tmp/destination/Travel Man/Season 03/Travel Man S03E11.mp4");
         });
 
-        it("returns files that could not be moved", () => {
+        it("returns files that could not be moved", async () => {
             outputFileSync("tmp/source/sub/Harmon Quest.S2E5.mp4", "");
             outputFileSync("tmp/source/Travel.Man.S03E11.mp4", "");
             mkdirSync("tmp/destination");
 
-            const actual = moveMedia("tmp/source", "tmp/destination");
+            const actual = await moveMedia("tmp/source", "tmp/destination");
 
             const isFile = negate(isDirectory);
             const sourceContents = glob("tmp/source/**/*").filter(isFile);
