@@ -3,6 +3,7 @@ import {join, join as joinPaths} from "path";
 import {sync as glob} from "glob";
 import {padStart} from "lodash";
 import {CompleteEpisode} from "./episode";
+const moveFile = require('@npmcli/move-file')
 
 function formatFilename(episode: CompleteEpisode): string {
     const seasonNumber = padStart(episode.season.toString(), 2, '0');
@@ -25,7 +26,7 @@ export function moveToSeriesFolder(episode: CompleteEpisode): CompleteEpisode | 
 
     const newPath = `${episode.series.folder}/${seasonFolder}/${formatFilename(episode)}`;
     if(!existsSync(newPath)) {
-        renameSync(episode.path, newPath);
+        moveFile.sync(episode.path, newPath);
         return null;
     } else {
         return episode;

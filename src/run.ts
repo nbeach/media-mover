@@ -1,8 +1,8 @@
 import {isEmpty} from "lodash";
 import moveMedia from "./move-media";
 
-const downloadFolder = 'D:/Torrents/Complete';
-const seriesRootFolder = 'D:/TV';
+const downloadFolder = '/volume1/Scratch/Torrents/Complete';
+const seriesRootFolder = '/volume1/Television';
 
 const failures = moveMedia(downloadFolder, seriesRootFolder);
 
