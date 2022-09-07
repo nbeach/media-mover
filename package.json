@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "go": "npm run build; node src/run.ts",
     "clean": "rimraf 'src/**/*.js src/**/*.js.map src'",
     "build": "npm run clean && tsc",
     "test": "npm run build; mocha --compilers ts:ts-node/register --recursive \"src/**/*.spec.ts\"",

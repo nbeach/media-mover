@@ -7,12 +7,12 @@ describe("Episode Module", () => {
     describe("parseEpisode()", () => {
 
         where([
-            ['path',                                                                 'season', 'episode', 'series',                  'extension'],
-            ['some/folder/Travel Man S02E05.mp4',                                     2,        5,         'travel man',              'mp4'      ],
-            ['source/Travel.Man.S7E3.xvid.mkv',                                       7,        3,         'travel man',              'mkv'      ],
-            ['Travel-Man-S14E22-super-rip.avi',                                      14,       22,         'travel man',              'avi'      ],
-            ['Travel.Man.48.Hours.In.Series.5.2of4.Budapest.720p.HDTV.mp4',           5,        2,         'travel man 48 hours in',  'mp4'      ],
-            ['/volume1/Travel.Man.48.Hours.In.S11E02.Split.1080p.WEB.h264-WEBTUBE.mkv',  11,        2,         'travel man 48 hours in',              'mkv'      ],
+            ['path',                                                        'season', 'episode', 'series',                    'extension' ],
+            ['some/folder/Travel Man S02E05.mp4',                                  2,         5,         'travel man',              'mp4' ],
+            ['source/Travel.Man.S7E3.xvid.mkv',                                    7,         3,         'travel man',              'mkv' ],
+            ['Travel-Man-S14E22-super-rip.avi',                                   14,        22,         'travel man',              'avi' ],
+            ['Travel.Man.48.Hours.In.Series.5.2of4.Budapest.720p.HDTV.mp4',        5,         2,         'travel man 48 hours in',  'mp4' ],
+            ['/volume1/Foo S05E06.mkv',                                            5,         6,         'fooshow',                 'mkv' ],
             
         ])
         .it('parses episodes in the format "#path"', (scenario: any) => {
