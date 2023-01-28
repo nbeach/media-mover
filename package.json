@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "clean": "rimraf 'src/**/*.js src/**/*.js.map src'",
+    "clean": "rimraf src/**/*.js && rimraf src/**/*.js.map && rimraf src/**/*.d.ts",
     "build": "npm run clean && tsc",
     "test": "npm run build; mocha --compilers ts:ts-node/register --recursive \"src/**/*.spec.ts\"",
     "test:watch": "mocha --compilers ts:ts-node/register --recursive --watch --reporter progress \"src/**/*.spec.ts\""
