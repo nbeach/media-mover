@@ -12,7 +12,7 @@ describe("Episode Module", () => {
             ['source/Travel.Man.S7E3.xvid.mkv',                                    7,         3,         'travel man',              'mkv' ],
             ['Travel-Man-S14E22-super-rip.avi',                                   14,        22,         'travel man',              'avi' ],
             ['Travel.Man.48.Hours.In.Series.5.2of4.Budapest.720p.HDTV.mp4',        5,         2,         'travel man 48 hours in',  'mp4' ],
-            ['/volume1/Foo S05E06.mkv',                                            5,         6,         'fooshow',                 'mkv' ],
+            ['/volume1/Foo S05E06.mkv',                                            5,         6,         'foo',                 'mkv' ],
             
         ])
         .it('parses episodes in the format "#path"', (scenario: any) => {
